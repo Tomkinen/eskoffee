@@ -23,38 +23,38 @@ function calculateCaffeineLevels () {
 	store.forEach(function (userData) {
 		const currentCaffeineLevel = userData.caffeineLevel[userData.caffeineLevel.length - 1];
 		let newCaffeineLevel = 0;
-		if (currentCaffeineLevel < 0.2) {
+		if (currentCaffeineLevel < 0.1) {
 			newCaffeineLevel = 0;
 		}
 		else {
 			newCaffeineLevel = Number(currentCaffeineLevel) - ((Number(currentCaffeineLevel)/2)/300);
 		}
-		userData.caffeineLevel.push(parseFloat(newCaffeineLevel.toFixed(1)));
+		userData.caffeineLevel.push(newCaffeineLevel);
 		userData.caffeineLevel.shift();
 		if (userData.userName !== masterUser) {
 			officeCaffeineLevel = Number(officeCaffeineLevel) + Number(newCaffeineLevel);
-			store[0].caffeineLevel[store[0].caffeineLevel.length-1] = parseFloat(officeCaffeineLevel.toFixed(1));
+			store[0].caffeineLevel[store[0].caffeineLevel.length-1] = officeCaffeineLevel;
 		}
 		if (hourCount === 60) {
-			userData.caffeineLong.push(parseFloat(newCaffeineLevel.toFixed(1)));
+			userData.caffeineLong.push(newCaffeineLevel);
 			userData.caffeineLong.shift();
 			if (userData.userName !== masterUser) {
-				store[0].caffeineLong[store[0].caffeineLong.length-1] = parseFloat(officeCaffeineLevel.toFixed(1));
+				store[0].caffeineLong[store[0].caffeineLong.length-1] = officeCaffeineLevel;
 			}
 		}
-		userData.caffeineMax = parseFloat(Math.max(...userData.caffeineLevel).toFixed(1));
+		userData.caffeineMax = Math.max(...userData.caffeineLevel);
 		if (userData.caffeineLongMax < userData.caffeineMax) {
-			userData.caffeineLongMax = parseFloat(userData.caffeineMax.toFixed(1));
+			userData.caffeineLongMax = userData.caffeineMax;
 		}
-		userData.caffeineCurrent = parseFloat(userData.caffeineLevel[userData.caffeineLevel.length - 1].toFixed(1));
-		userData.caffeineLongCurrent = parseFloat(userData.caffeineLong[userData.caffeineLong.length - 1].toFixed(1));
+		userData.caffeineCurrent = userData.caffeineLevel[userData.caffeineLevel.length - 1];
+		userData.caffeineLongCurrent = userData.caffeineLong[userData.caffeineLong.length - 1];
 		userData.caffeineLevelObject = Object.assign({}, userData.caffeineLevel); 
 		userData.caffeineLongObject = Object.assign({}, userData.caffeineLong); 
 	});
 	if (hourCount === 60) {
 		hourCount = 0;
 	}
-	console.log(`${Date()}\nEskoffee Caffeine Decision Support calculated office caffeine level: ${Number(officeCaffeineLevel).toFixed(1)}`);
+	console.log(`${Date()}\nEskoffee Caffeine Decision Support calculated office caffeine level: ${Number(officeCaffeineLevel).toFixed(5)}`);
 }
 
 schedule.scheduleJob("* * * * *", calculateCaffeineLevels);
@@ -120,18 +120,18 @@ app.post("/api/drink/add", function (req, res) {
 	store.forEach(function (userData) {
 		if (userData.userName !== masterUser) {
 			officeCaffeineLevel = Number(officeCaffeineLevel) + Number(userData.caffeineLevel[userData.caffeineLevel.length - 1]);
-			store[0].caffeineLevel[store[0].caffeineLevel.length-1] = parseFloat(officeCaffeineLevel.toFixed(1));
+			store[0].caffeineLevel[store[0].caffeineLevel.length-1] = officeCaffeineLevel;
 			store[0].caffeineLevelObject = Object.assign({}, store[0].caffeineLevel); 
 			store[0].caffeineLongObject = Object.assign({}, store[0].caffeineLong); 
 		}
 	});
 	store.forEach(function (userData) {
-		userData.caffeineMax = parseFloat(Math.max(...userData.caffeineLevel).toFixed(1));
+		userData.caffeineMax = Math.max(...userData.caffeineLevel);
 		if (userData.caffeineLongMax < userData.caffeineMax) {
-			userData.caffeineLongMax = parseFloat(userData.caffeineMax.toFixed(1));
+			userData.caffeineLongMax = userData.caffeineMax;
 		}
-		userData.caffeineCurrent = parseFloat(userData.caffeineLevel[userData.caffeineLevel.length - 1].toFixed(1));
-		userData.caffeineLongCurrent = parseFloat(userData.caffeineLong[userData.caffeineLong.length - 1].toFixed(1));
+		userData.caffeineCurrent = userData.caffeineLevel[userData.caffeineLevel.length - 1];
+		userData.caffeineLongCurrent = userData.caffeineLong[userData.caffeineLong.length - 1];
 		userData.caffeineLevelObject = Object.assign({}, userData.caffeineLevel); 
 		userData.caffeineLongObject = Object.assign({}, userData.caffeineLong); 
 	});
