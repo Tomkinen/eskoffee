@@ -20,7 +20,7 @@ Just for fun and self-learning. And to optimize caffeine levels.
 
 ## Installation
 
-You must have Node.js installed. Install required modules. By default the UI can be accessed from port 8080. You can define port with process.env._SERVER_PORT. I have tested UI to work fine with latest versions of Firefox, Chrome, Safari, Edge and Opera.
+You must have Node.js installed. Install required modules. By default the UI can be accessed from port 8080. You can define port with process.env.SERVER_PORT. I have tested UI to work fine with latest versions of Firefox, Chrome, Safari, Edge and Opera.
 
 ## API Reference
 
