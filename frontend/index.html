@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eskoffee</title>
+
+    <!-- Libraries from cloudflare CDN. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/furtive/2.3.0/furtive.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.19/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+	<script src="https://unpkg.com/chart.js@2.7.2/dist/Chart.bundle.js"></script>
+	<script src="https://unpkg.com/vue-chartkick@0.5.0"></script>
+
+    <!-- All custom frontend javascript in frontend.js. -->
+    <script src="frontend.js"></script>
+</head>
+<body class="bg--light-gray">
+	<div id="app" class="grd">
+		<div class="grd-row">
+		    <div class="grd-row-col-1-6"></div>
+		    <div class="grd-row-col-4-6 bg--white p1">
+		    	<h2>Eskoffee</h2>
+		    	<p><b>- Caffeine decision support -</b></p>
+		    	<p>Eskoffee tells you if you still have caffeine in your system to keep you coding (or some other activity that requires caffeine).</p>
+		    	<p>To you to keep you safe: Dangerous levels cannot be reached and you will receive a warning and recommendation to drink water.</p>
+		    	<p>Eskoffee measures your personal caffeine level and combined office caffeine level. Caffeine half-life in your body is approximately 5 hours.
+		    		Caffeine level measurement is based on that rough estimate. Caffeine level per drink is based on average caffeine amounts researched from the depths of the Internet.</p>
+		    	<p>You can add/remove users and get graphs that display caffeine level for the last 12 hours or last 30 days.
+		    		Current caffeine level is displayed as well as highest peak levels. "Office" caffeine levels are a combination of all users.</p>
+		    </div>
+			<div class="grd-row-col-1-6"></div>
+		</div>
+		<hr>
+		<div class="grd-row">
+		    <div class="grd-row-col-1-6"></div>
+		    <div class="grd-row-col-4-6 bg--white p1">
+		    	<input type="text" id="userName" v-model="userName" maxlength="50" placeholder="Write your name here and click 'Add user' -button">
+		    	<button class="btn" v-on:click="addUser()">Add user</button>
+		    </div>
+			<div class="grd-row-col-1-6"></div>
+		</div>
+		<span v-for="drinker in state">
+			<hr>
+			<div class="grd-row">
+		        <div class="grd-row-col-1-6"></div>
+		        <div class="grd-row-col-2-6 bg--white p1">
+		        	<h2>{{ drinker.userName }}</h2>
+		        	<p>Current caffeine level: {{ drinker.caffeineCurrent }} mg</p>
+		        	<p v-if="drinker.userName!=='OFFICE'"><button class="btn" v-on:click="removeUser(drinker.userName)">Remove user</button></p>
+		        </div>
+		        <div class="grd-row-col-2-6 bg--white p1">
+		        	<h4 v-if="drinker.userName!=='OFFICE'">Click to Drink:</h4>
+		        	<p v-if="drinker.userName!=='OFFICE'">
+		        		<button class="btn" v-on:click="drink(drinker,40)">Coffee</button>
+		        		<button class="btn" v-on:click="drink(drinker,25)">Black Tea</button>
+		        		<button class="btn" v-on:click="drink(drinker,8)">Green Tea</button>
+		        		<button class="btn" v-on:click="drink(drinker,29.4)">Cola can</button>
+		        		<button class="btn" v-on:click="drink(drinker,40)">Cola bottle 0.5l</button>
+		        		<button class="btn" v-on:click="drink(drinker,77.4)">Energy drink</button>
+		        		<button class="btn" v-on:click="drink(drinker,40)">Espresso</button>
+		        		<button class="btn" v-on:click="drink(drinker,80)">Americano</button>
+		        		<button class="btn" v-on:click="drink(drinker,80)">Cappuccino</button>
+		        		<button class="btn" v-on:click="drink(drinker,80)">Latte</button>
+		        		<button class="btn" v-on:click="drink(drinker,80)">Macchiato</button>
+		        	</p>
+		        </div>
+				<div class="grd-row-col-1-6"></div>
+			</div>
+			<div class="grd-row">
+		        <div class="grd-row-col-1-6"></div>
+		        <div class="grd-row-col-2-6 bg--white p1">
+		        	<h4>Caffeine Level (12 hours)</h4>
+		        	<p>Highest caffeine level: {{ drinker.caffeineMax }} mg</p>
+		  			<line-chart :data="drinker.caffeineLevelObject" :library="chartOptions"></line-chart>
+				</div>
+				<div class="grd-row-col-2-6 bg--white p1">
+		        	<h4>Caffeine Level (30 days)</h4>
+		        	<p>Highest caffeine level: {{ drinker.caffeineLongMax }} mg</p>
+		  			<line-chart :data="drinker.caffeineLongObject" :library="chartOptions"></line-chart>
+				</div>
+				<div class="grd-row-col-1-6"></div>
+			</div>
+		</span>
+	</div>
+</body>
+</html>
