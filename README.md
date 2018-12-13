@@ -6,13 +6,11 @@ Eskoffee tells you if you still have caffeine in your system to keep you coding 
 
 To keep you safe: Dangerous levels cannot be reached and you will receive a warning and recommendation to drink water.
 
-Eskoffee measures your personal caffeine level and combined office caffeine level. Caffeine half-life in your body is approximately 5 hours.
+Eskoffee measures your personal caffeine level and combined office caffeine level. Caffeine half-life in your body is approximately 5 hours. Caffeine level measurement is based on that rough estimate. Caffeine level per drink is based on average caffeine amounts researched from the depths of the Internet.
 
-Caffeine level measurement is based on that rough estimate. Caffeine level per drink is based on average caffeine amounts researched from the depths of the Internet.
+You can add/remove users and get graphs that display caffeine level for the last 12 hours or last 30 days. Current caffeine level is displayed as well as highest peak levels. "Office" caffeine levels are a combination of all users.
 
-You can add/remove users and get graphs that display caffeine level for the last 12 hours or last 30 days.
-
-Current caffeine level is displayed as well as highest peak levels. "Office" caffeine levels are a combination of all users.
+Eskoffee updates and refreshes data and line graphs automatically every minute.
 
 ## Why does this repository exist?
 
