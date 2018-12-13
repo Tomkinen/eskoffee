@@ -1,10 +1,10 @@
 ## Eskoffee
 
-- Caffeine decision support -
+####Caffeine decision support
 
 Eskoffee tells you if you still have caffeine in your system to keep you coding (or some other activity that requires caffeine).
 
-To you to keep you safe: Dangerous levels cannot be reached and you will receive a warning and recommendation to drink water.
+To keep you safe: Dangerous levels cannot be reached and you will receive a warning and recommendation to drink water.
 
 Eskoffee measures your personal caffeine level and combined office caffeine level. Caffeine half-life in your body is approximately 5 hours.
 
