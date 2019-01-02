@@ -149,7 +149,6 @@ app.post("/api/drink/add", function(req, res) {
   );
   store.filter(function(obj) {
     let caffeineNumber = Number(req.body.caffeine);
-    caffeineNumber = caffeineNumber;
     if (
       obj.userName === req.body.userName &&
       req.body.userName !== masterUser &&
